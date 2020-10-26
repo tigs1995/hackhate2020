@@ -1,0 +1,33 @@
+/* body {
+    font-family: 'Baloo Da 2', cursive;
+} */
+.homePageContent {
+  display: "flex";
+  margin-top: 10px;
+  margin-left: 10px;
+}
+.projectName {
+  font-family: "Helvetica";
+  font-size: 50px;
+  color: "#989898";
+}
+.projectNameBox {
+  margin-left: 50px;
+  margin-top: 50px;
+}
+.displayFlex {
+  display: "flex";
+  width: 100%;
+}
+.leftNavBar {
+  display: "flex";
+  text-align: "left";
+  width: 98%;
+}
+.sortButton {
+  width: 100px;
+  height: 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
