@@ -3,7 +3,10 @@ import React from "react";
 import ColumnGenerator from "./columnGenerator";
 import SortTable from "./sortTable";
 import Formatting from "../../CSS/formatting.css";
-import Styles from "./styles";
+import Table from "react-bootstrap/Table";
+import { Box, Typography } from "@material-ui/core";
+import TwitterIcon from "../images/twitterIcon.png";
+import RenderIcon from "./renderIcon";
 
 function SortingTable({ data }) {
   const columns = data[0] ? ColumnGenerator(data[0]) : [];
@@ -24,12 +27,13 @@ function SortingTable({ data }) {
 
   // We don't want to render all 2000 rows for this example, so cap
   // it at 20 for this use case
-  const firstPageRows = rows.slice(0, 20);
+  // const firstPageRows = rows.slice(0, 20);
 
   return (
-    <Styles>
-      <table {...getTableProps()} id="myTable">
-        <thead>
+    <Box className="sortingTable">
+      <Typography>{rows.length} Results</Typography>
+      <Table {...getTableProps()} id="myTable" striped bordered hover>
+        <thead style={{ backgroundColor: "#71a1f4", color: "white" }}>
           {headerGroups.map((headerGroup) => (
             <tr>
               {headerGroup.headers.map((column, index) => (
@@ -43,23 +47,24 @@ function SortingTable({ data }) {
           ))}
         </thead>
         <tbody {...getTableBodyProps()}>
-          {firstPageRows.map((row, i) => {
-            prepareRow(row);
+          {data.map((individualData) => {
             return (
-              <tr {...row.getRowProps()}>
-                {row.cells.map((cell) => {
-                  return (
-                    <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
-                  );
-                })}
+              <tr>
+                <td>{individualData.victim}</td>
+                <td>
+                  <span className="icon">
+                    {RenderIcon(individualData.contactType)}
+                  </span>
+                </td>
+                <td>{individualData.contact}</td>
+                <td>{individualData.summary}</td>
+                <td>{individualData.date}</td>
               </tr>
             );
           })}
         </tbody>
-      </table>
-      <br />
-      {/* <div>Showing the first 20 results of {rows.length} rows</div> */}
-    </Styles>
+      </Table>
+    </Box>
   );
 }
 

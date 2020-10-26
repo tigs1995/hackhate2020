@@ -27,16 +27,18 @@ const sk = new SearchkitManager("http://18.134.149.85:9200", {
 export default class HomePage extends React.Component {
   render() {
     return (
-      <Box className="homePageContent">
+      <Box>
         <NavBar />
-        <SearchkitProvider searchkit={sk}>
-          <div>
-            <Typography>Search below:</Typography>
-            <SearchBox />
-            <Hits />
-          </div>
+        <Box className="homePageContent">
+          <SearchkitProvider searchkit={sk}>
+            <div>
+              <Typography>Search below:</Typography>
+              <SearchBox />
+              <Hits />
+            </div>
+          </SearchkitProvider>{" "}
           <SortingTable data={Data} />
-        </SearchkitProvider>
+        </Box>
       </Box>
     );
   }

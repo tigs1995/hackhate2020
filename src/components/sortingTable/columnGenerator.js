@@ -6,10 +6,10 @@ function ColumnGenerator(obj) {
 }
 
 const headerReplacer = {
-  suspect: "Suspect Name",
+  victim: "Victim Name",
   contactType: "Contact Type",
   contact: "Contact Info",
-  summary: "ContentSummary",
+  summary: "Content Summary",
   date: "Date Sent",
 };
 
