@@ -20,9 +20,9 @@ import SortingTable from "../components/sortingTable/sortingTable";
 import React, { useState } from "react";
 import Data from "../components/sortingTable/data.json";
 
-const sk = new SearchkitManager("http://18.134.149.85:9200", {
-  basicAuth: "read: elastic",
-});
+const sk = new SearchkitManager(
+  "http://18.134.149.85:9200/hackhate-raw-3/_search/"
+);
 
 export default class HomePage extends React.Component {
   render() {
