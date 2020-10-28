@@ -64,7 +64,11 @@ export default class HomePage extends React.Component {
           <SearchkitProvider searchkit={sk}>
             <div>
               <Typography>Search below:</Typography>
-              <SearchBox />
+              <SearchBox
+              searchOnChange={true}
+              queryOptions={{analyzer:"standard"}}
+              queryFields={["*"]}
+              />
               <Hits hitsPerPage={50} listComponent={HitsTable} />
             </div>
           </SearchkitProvider>{" "}
