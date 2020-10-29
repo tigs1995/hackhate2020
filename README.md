@@ -1,3 +1,53 @@
+# Hack Hate 2020
+
+A hackathon project for [HackHate 2020](https://www.eventbrite.co.uk/e/hack-hate-the-hackathon-against-hate-crime-tickets-120116372303).
+
+The repostory is a React frontend that interacts with a [Elastic Search](https://www.elastic.co/) backend. Elastic Search components are from the [Searchkit project](https://github.com/searchkit/searchkit).
+
+## Starting the UI
+
+The project is managed by npm:
+
+```bash
+npm install
+npm run
+```
+
+The UI should then be available at http://localhost:3000
+
+## Elastic Search
+
+This project uses a public Elastic instance with anonymous read access: http://18.134.149.85:9200. Complete REST documentation can be found at https://www.elastic.co/guide/en/elasticsearch/reference/current/rest-apis.html.
+
+The Elastic instance also has Kibana: http://18.134.149.85:5601/
+
+### Useful Elastic Curl Commands
+
+The following could be useful to investigate Elastic.
+
+Empty search that returns everything:
+
+```bash
+curl -X POST 18.134.149.85:9200/hackhate-raw-3/_search -H 'Content-Type: application/json' | jq .
+```
+
+Simple search query for "363":
+
+```bash
+curl -X POST 18.134.149.85:9200/hackhate-raw-3/_search -H 'Content-Type: application/json' -d'{"query": { "simple_query_string": {"query": "363", "fields": ["*"] } }, "_source": true }' | jq .
+```
+
+List mappings:
+
+```bash
+curl -X GET 18.134.149.85:9200/hackhate-raw-3/_mapping -H 'Content-Type: application/json' --user username:password | jq .
+```
+
+
+## React Documentation
+
+*The following is from the original React project starter.*
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
