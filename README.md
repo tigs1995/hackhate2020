@@ -43,6 +43,20 @@ List mappings:
 curl -X GET 18.134.149.85:9200/hackhate-raw-3/_mapping -H 'Content-Type: application/json' --user username:password | jq .
 ```
 
+## Docker
+
+A docker image can be built:
+
+```bash
+docker build -t hackhate2020-ui .
+```
+
+And then run:
+
+```bash
+docker run -p 8080:80 hackhate2020-ui
+```
+
 
 ## React Documentation
 
