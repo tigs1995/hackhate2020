@@ -4,55 +4,97 @@ import {
   SearchBox,
   Hits,
 } from "searchkit";
-import {
-  Typography,
-  makeStyles,
-  AppBar,
-  Toolbar,
-  IconButton,
-  Menu,
-  MenuItem,
-  Box,
-} from "@material-ui/core";
-import MenuIcon from "@material-ui/icons/Menu";
+import { Typography, Box } from "@material-ui/core";
 import NavBar from "../components/navBar";
-import SortingTable from "../components/sortingTable/sortingTable";
 import React, { useState } from "react";
-import Data from "../components/sortingTable/data.json";
+import Table from "react-bootstrap/Table";
+import RenderIcon from "../components/sortingTable/renderIcon";
+import SortTable from "../components/sortingTable/sortTable";
+import Formatting from "../CSS/formatting.css";
 
 class HitsTable extends React.Component {
+  render() {
+    let { hits } = this.props;
 
-  render(){
-    let { hits } = this.props
+    let last50Hits = hits.slice(Math.max(hits.length - 50, 0));
+    let hitsIncludingKingKevin = hits.slice(200, 250);
+    for (let hit of hitsIncludingKingKevin) {
+      last50Hits.push(hit);
+    }
+    console.log(hits);
     return (
-      <div style={{width: '100%', boxSizing: 'border-box', padding: 8}}>
-        <table className="sk-table sk-table-striped" style={{width: '100%', boxSizing: 'border-box'}}>
-          <thead>
-            <tr>
-              <th>Email</th>
-              <th>Handle</th>
-              <th>Tweet</th>
-              <th>Extracted Link</th>
+      <Table id="myTable" striped bordered hover className="sortingTable">
+        <thead className="tableHeader">
+          <tr>
+            <th onClick={() => SortTable(0)}>Perpetrator Handle</th>
+            <th>Handle Platform</th>
+            <th onClick={() => SortTable(2)}>Incident Content</th>
+            <th onClick={() => SortTable(3)}>Content Link</th>
+            <th onClick={() => SortTable(4)}>Incident Date</th>
+            <th onClick={() => SortTable(5)}>Crime ref</th>
+          </tr>
+        </thead>
+        <tbody>
+          {last50Hits.map((hit) => (
+            <tr key={hit._id}>
+              <td
+                className={
+                  hit._source.screen_name ? "handleCell" : "handleCellReferral"
+                }
+              >
+                {hit._source.screen_name
+                  ? hit._source.screen_name
+                  : hit._source["Perpetrator Twitter handle"] === "N/A"
+                  ? hit._source["Perpetrator Twitter handle"]
+                  : "@" + hit._source["Perpetrator Twitter handle"]}
+              </td>
+              <td className="iconCell">
+                {hit._source.data_origin
+                  ? RenderIcon(hit._source.data_origin)
+                  : RenderIcon("/twitter/")}
+              </td>
+              <td
+                className="contentBodyCell"
+                title={
+                  hit._source.text
+                    ? hit._source.text
+                    : hit._source["Incident Description"]
+                }
+              >
+                {hit._source.text
+                  ? hit._source.text
+                  : hit._source["Incident Description"]}
+              </td>
+              <td className="contentLink">
+                <a href={hit._source.extracted_link} target="_blank">
+                  {hit._source.extracted_link
+                    ? hit._source.extracted_link
+                    : "N/A"}
+                </a>
+              </td>
+              <td className="dateCell">
+                {hit._source.created_at
+                  ? hit._source.created_at
+                  : hit._source["Incident Date"]}
+              </td>
+              <td className="crimeReference">
+                <a
+                  href="https://www.met.police.uk/advice/advice-and-information/acr/after-you-report-a-crime/"
+                  target="_blank"
+                >
+                  0293747585
+                </a>
+              </td>
             </tr>
-          </thead>
-          <tbody>
-            {hits.map(hit => (
-              <tr key={hit._id}>
-                <td>{hit._source.email}</td>
-                <td>{hit._source.handle}</td>
-                <td>{hit._source.tweet}</td>
-                <td><a href={hit._source.extracted_link} target="_blank">{hit._source.extracted_link}</a></td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    )
+          ))}
+        </tbody>
+      </Table>
+    );
   }
 }
 
 const sk = new SearchkitManager(
-  "http://18.134.149.85:9200/hackhate-raw-3/"
+  "http://18.134.149.85:9200/referrals,flagged-incidents"
 );
 
 export default class HomePage extends React.Component {
@@ -65,14 +107,13 @@ export default class HomePage extends React.Component {
             <div>
               <Typography>Search below:</Typography>
               <SearchBox
-              searchOnChange={true}
-              queryOptions={{analyzer:"standard"}}
-              queryFields={["*"]}
+                searchOnChange={true}
+                queryOptions={{ analyzer: "standard" }}
+                queryFields={["*"]}
               />
-              <Hits hitsPerPage={50} listComponent={HitsTable} />
+              <Hits hitsPerPage={1000} listComponent={HitsTable} />
             </div>
-          </SearchkitProvider>{" "}
-          {/*<SortingTable data={Data} //*/}
+          </SearchkitProvider>
         </Box>
       </Box>
     );

@@ -1,40 +1,64 @@
-/* body {
-    font-family: 'Baloo Da 2', cursive;
-} */
 .homePageContent {
   display: "flex";
   margin-top: 10px;
   margin-left: 30px;
   margin-right: 30px;
 }
-.projectName {
-  font-family: "Helvetica";
-  font-size: 50px;
-  color: "#989898";
-}
-.projectNameBox {
-  margin-left: 50px;
-  margin-top: 50px;
-}
-.displayFlex {
-  display: "flex";
-  width: 100%;
-}
 .leftNavBar {
   display: "flex";
   text-align: "left";
   width: 98%;
-}
-.sortButton {
-  width: 100px;
-  height: 20px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  border-radius: 5px;
 }
 .sortingTable {
   margin-top: 10px;
 }
 .icon {
   margin-left: 85px;
+}
+.tableHeader {
+  font-size: 11pt;
+  background-color: #668cff;
+  color: white;
+  text-align: center;
+}
+.contentBodyCell {
+  max-width: 60px;
+  white-space: nowrap;
+  overflow: hidden;
+  font-size: 10pt;
+}
+.emailCell {
+  font-size: 10pt;
+  width: 210px; /* tweak me please */
+  word-break: break-all;
+}
+.handleCell {
+  font-size: 10pt;
+  width: 165px;
+  word-break: break-all;
+}
+.handleCellReferral {
+  font-size: 10pt;
+  width: 155px;
+  word-break: break-all;
+  font-weight: bold;
+}
+.crimeReference {
+  font-size: 10pt;
+  width: 120px;
+  word-break: break-all;
+}
+.contentLink {
+  font-size: 10pt;
+  width: 140px;
+  word-break: break-all;
+}
+.iconCell {
+  text-align: center;
+  width: 80px;
+}
+.dateCell {
+  font-size: 10pt;
+  width: 130px;
+  word-break: break-all;
 }
