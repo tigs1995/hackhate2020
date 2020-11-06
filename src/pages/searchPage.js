@@ -4,9 +4,9 @@ import {
   SearchBox,
   Hits,
 } from "searchkit";
-import { Typography, Box } from "@material-ui/core";
+import { Typography, Box, Button } from "@material-ui/core";
 import NavBar from "../components/navBar";
-import React, { useState } from "react";
+import React from "react";
 import Table from "react-bootstrap/Table";
 import RenderIcon from "../components/sortingTable/renderIcon";
 import SortTable from "../components/sortingTable/sortTable";
@@ -15,13 +15,14 @@ import Formatting from "../CSS/formatting.css";
 class HitsTable extends React.Component {
   render() {
     let { hits } = this.props;
-
+    //Rendering more than 50 hits at a time slows the sorting of the table. In the future, use pagination to solve this problem
+    //Last 10 contain the referral data, therefore last 50 have to be taken
     let last50Hits = hits.slice(Math.max(hits.length - 50, 0));
+    //This is where kingkevin471 (example being used in presentation) is
     let hitsIncludingKingKevin = hits.slice(200, 250);
     for (let hit of hitsIncludingKingKevin) {
       last50Hits.push(hit);
     }
-    console.log(hits);
     return (
       <Table id="myTable" striped bordered hover className="sortingTable">
         <thead className="tableHeader">
@@ -53,14 +54,7 @@ class HitsTable extends React.Component {
                   ? RenderIcon(hit._source.data_origin)
                   : RenderIcon("/twitter/")}
               </td>
-              <td
-                className="contentBodyCell"
-                title={
-                  hit._source.text
-                    ? hit._source.text
-                    : hit._source["Incident Description"]
-                }
-              >
+              <td className="contentBodyCell">
                 {hit._source.text
                   ? hit._source.text
                   : hit._source["Incident Description"]}
@@ -106,11 +100,15 @@ export default class HomePage extends React.Component {
           <SearchkitProvider searchkit={sk}>
             <div>
               <Typography>Search below:</Typography>
-              <SearchBox
-                searchOnChange={true}
-                queryOptions={{ analyzer: "standard" }}
-                queryFields={["*"]}
-              />
+              <Box className="topPartOfSearchPage">
+                <SearchBox
+                  searchOnChange={true}
+                  queryOptions={{ analyzer: "standard" }}
+                  queryFields={["*"]}
+                />
+                <button className="exportButton">CSV</button>
+              </Box>
+
               <Hits hitsPerPage={1000} listComponent={HitsTable} />
             </div>
           </SearchkitProvider>

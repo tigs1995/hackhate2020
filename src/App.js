@@ -1,5 +1,4 @@
 import React from "react";
-import "./App.css";
 import { BrowserRouter as Router, Route, withRouter } from "react-router-dom";
 import SearchPage from "./pages/searchPage";
 

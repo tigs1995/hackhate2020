@@ -23,8 +23,8 @@
 }
 .contentBodyCell {
   max-width: 60px;
-  white-space: nowrap;
   overflow: hidden;
+  word-wrap: break-word;
   font-size: 10pt;
 }
 .emailCell {
@@ -61,4 +61,14 @@
   font-size: 10pt;
   width: 130px;
   word-break: break-all;
+}
+.topPartOfSearchPage {
+  display: flex;
+}
+.exportButton {
+  margin-left: 76.5%;
+  width: 80px;
+  background-color: #668cff;
+  border-radius: 4px;
+  border-color: rgb(124, 121, 121);
 }
