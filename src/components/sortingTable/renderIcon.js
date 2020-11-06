@@ -3,6 +3,7 @@ import TwitterIcon from "../images/twitterIcon.png";
 import FacebookIcon from "../images/facebookIcon.png";
 import InstagramIcon from "../images/instagramIcon.png";
 import EmailIcon from "../images/emailIcon.jpg";
+import InPersonIcon from "../images/inPersonIcon.jpg";
 
 function RenderIcon(iconType) {
   switch (iconType) {
@@ -14,6 +15,8 @@ function RenderIcon(iconType) {
       return <img src={FacebookIcon} alt="Logo" height="30px" />;
     case "/email/":
       return <img src={EmailIcon} alt="Logo" height="30px" />;
+    case "/inperson/":
+      return <img src={InPersonIcon} alt="Logo" height="30px" />;
     default:
       return null;
   }

@@ -52,7 +52,7 @@ class HitsTable extends React.Component {
               <td className="iconCell">
                 {hit._source.data_origin
                   ? RenderIcon(hit._source.data_origin)
-                  : RenderIcon("/twitter/")}
+                  : RenderIcon("/inperson/")}
               </td>
               <td className="contentBodyCell">
                 {hit._source.text
