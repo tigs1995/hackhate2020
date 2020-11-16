@@ -9,13 +9,11 @@ const tableId = "my-table";
 const tableHeaderId = "header-section";
 
 describe("Test first column is present", () => {
-  // beforeEach(() => {
-  //   var component = renderer(<NavBar></NavBar>);
-  //   // render(<NavBar />);
-  // });
+  beforeEach(() => {
+    var component = renderer.create(<NavBar></NavBar>);
+  });
 
   test("Project name is present", () => {
-    const component = renderer.create(<NavBar></NavBar>);
     const table = screen.getByTestId(tableId);
     expect(table).toBeInTheDocument();
 
