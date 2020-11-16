@@ -24,8 +24,15 @@ class HitsTable extends React.Component {
       last50Hits.push(hit);
     }
     return (
-      <Table id="myTable" striped bordered hover className="sortingTable">
-        <thead className="tableHeader">
+      <Table
+        id="myTable"
+        data-test="my-table"
+        striped
+        bordered
+        hover
+        className="sortingTable"
+      >
+        <thead className="tableHeader" data-test="header-section">
           <tr>
             <th onClick={() => SortTable(0)}>Perpetrator Handle</th>
             <th>Handle Platform</th>
