@@ -66,8 +66,9 @@
   display: flex;
 }
 .exportButton {
-  margin-left: 76.5%;
+  margin-left: 79.5%;
   width: 80px;
+  height: 35px;
   background-color: #668cff;
   border-radius: 4px;
   border-color: rgb(124, 121, 121);
